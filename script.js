@@ -1,9 +1,9 @@
+"use strict";
 var GAME_INIT_MONEY = 100;
 var GAME_MAX_NUMBER = 10; // THESE NEEDS TO BE CHANGED ON HTML AS WELL
 var GAME_MAX_BET = 10; var GAME_MIN_BET = 5;
-var bankroll, currentBet, gameOn, guessPhase;
+var bankroll, gameOn, guessPhase, betPhase, bet, guess;
 var currencyDisplay, consoleLog, userButton, betInput, guessInput;
-var bet, guess;
 
 (function()
 {
@@ -45,8 +45,8 @@ function mainButtonClick()
 
 function makeGuess(guess)
 {
-  number = Math.floor(Math.random() * GAME_MAX_NUMBER) + 1;
-  var displayString = "The number was " + number
+  var number = Math.floor(Math.random() * GAME_MAX_NUMBER) + 1;
+  var displayString = "The number was " + number;
   switch (guess - number)
   {
     case 0:
@@ -81,7 +81,7 @@ function resetGame()
     guessPhase = false;
     betInput.classList.toggle('hide');
     guessInput.classList.toggle('hide');
-    userButton.innerHTML = "Bet!"
+    userButton.innerHTML = "Bet!";
   }
   setDisplay("Better luck this time!");
 }
@@ -93,11 +93,11 @@ function toggle()
   guessInput.classList.toggle('hide');
   if (guessPhase)
   {
-    userButton.innerHTML = "Guess!"
+    userButton.innerHTML = "Guess!";
     setDisplay("Guess a number between 1 and " + GAME_MAX_NUMBER);
   }
   else
   {
-    userButton.innerHTML = "Bet!"
+    userButton.innerHTML = "Bet!";
   }
 }

@@ -59,14 +59,18 @@ function mainButtonClick()
   if (!gameOn) return;
   bet = parseInt(betInput.value);
   if (!isInt(bet)) return;
+
   if (betPhase)
   {
     bet = parseInt(betInput.value);
-    if (bet > GAME_MAX_BET)
-      bet = GAME_MAX_BET;
-    if (bet < GAME_MIN_BET)
-      bet = GAME_MIN_BET;
-    toggle();
+    if ((bet > GAME_MAX_BET) || (bet < GAME_MIN_BET))
+    {
+      setDisplay("You must enter a value between blah and blah");
+    }
+    else
+    {
+      toggle();
+    }
   }
   else
   {

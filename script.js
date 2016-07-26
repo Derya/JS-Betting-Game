@@ -3,7 +3,7 @@ var GAME_INIT_MONEY = 100;
 var GAME_MAX_NUMBER = 10; // THESE NEEDS TO BE CHANGED ON HTML AS WELL
 var GAME_MAX_BET = 10; var GAME_MIN_BET = 5;
 var bankroll, gameOn, guessPhase, betPhase, bet, guess;
-var currencyDisplay, consoleLog, userButton, betInput, guessInput;
+var currencyDisplay, consoleLog, userButton, betInput, guessInput, currencyGraphic;
 
 (function()
 {
@@ -13,6 +13,7 @@ var currencyDisplay, consoleLog, userButton, betInput, guessInput;
   userButton = document.getElementById("user-button");
   betInput = document.getElementById("user-input-bet");
   guessInput = document.getElementById("user-input-guess");
+  currencyGraphic = document.getElementById("currency-graphic");
   guessInput.classList.toggle('hide');
   setDisplay("Welcome!");
 })();
@@ -22,11 +23,42 @@ function setDisplay(stringIn)
 {
   consoleLog.innerHTML = stringIn;
   currencyDisplay.innerHTML = bankroll.toString();
+  displayCurrency();
+}
+
+function displayCurrency()
+{
+  clearCurrency();
+  var numTens = bankroll / 10 >> 0;
+  var numOnes = bankroll % 10;
+  for (var i = 0; i < numTens; i++)
+    addCurrency(10);
+  for (var i = 0; i < numOnes; i++)
+    addCurrency(1);
+}
+
+function addCurrency(denomination)
+{
+  var iconImg = document.createElement('img');
+  iconImg.src = "money_" + denomination.toString() + ".png";
+  iconImg.style.height = "100px";
+  currencyGraphic.appendChild(iconImg);
+}
+
+function clearCurrency()
+{
+  var pics = currencyGraphic.children;
+  var length = pics.length;
+  while(length--) {
+    pics[length].remove();
+  }
 }
 
 function mainButtonClick()
 {
   if (!gameOn) return;
+  bet = parseInt(betInput.value);
+  if (!isInt(bet)) return;
   if (betPhase)
   {
     bet = parseInt(betInput.value);
@@ -100,4 +132,9 @@ function toggle()
   {
     userButton.innerHTML = "Bet!";
   }
+}
+
+function isInt(n) 
+{
+    return n != "" && !isNaN(n) && Math.round(n) == n;
 }

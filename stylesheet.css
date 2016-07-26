@@ -1,0 +1,23 @@
+* {
+  font-family:sans-serif;
+  font-size:1.2em;
+  text-align:center;
+}
+div {
+  width:100%;
+  margin:10px;
+}
+#game-holder {
+  margin:auto;
+  max-width:1200px;
+  border: 1px solid red;
+}
+input {
+  width:500px;
+}
+.hide {
+  display:none;
+}
+img {
+  margin:1px;
+}
